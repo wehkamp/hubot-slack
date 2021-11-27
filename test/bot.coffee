@@ -195,7 +195,7 @@ describe 'Handling incoming messages', ->
     @slackbot.eventHandler {type: 'message', text: 'foo', subtype: 'thread_broadcast', user: @stubs.user, channel: @stubs.channel.id }
     return
 
-  it 'Should prepend our name to a name-lacking message addressed to us in a DM', ->
+  it 'Should prepend our name to a name-lacking message addressed to us in a DM', (done) ->
     bot_name = @slackbot.robot.name
     @stubs.receiveMock.onReceived = (msg) ->
       msg.text.should.equal "#{bot_name} foo"
@@ -203,7 +203,7 @@ describe 'Handling incoming messages', ->
     @slackbot.eventHandler {type: 'message', text: "foo", user: @stubs.user, channel: @stubs.DM.id}
     return
 
-  it 'Should NOT prepend our name to a name-containing message addressed to us in a DM', ->
+  it 'Should NOT prepend our name to a name-containing message addressed to us in a DM', (done) ->
     bot_name = @slackbot.robot.name
     @stubs.receiveMock.onReceived = (msg) ->
       msg.text.should.equal "#{bot_name} foo"

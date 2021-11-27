@@ -231,7 +231,7 @@ describe 'send()', ->
     @client.send { name: "my_crufty_username" }, "don't program with usernames"
     @stubs._sendCount.should.equal 0
 
-  it 'should log an error when chat.postMessage fails (plain string)', ->
+  it 'should log an error when chat.postMessage fails (plain string)', (done) ->
     @client.send { room: @stubs.channelWillFailChatPost }, "Message"
     @stubs._sendCount.should.equal 0
     setImmediate(( =>
@@ -239,7 +239,7 @@ describe 'send()', ->
       done()
     ), 0);
 
-  it 'should log an error when chat.postMessage fails (object)', ->
+  it 'should log an error when chat.postMessage fails (object)', (done) ->
     @client.send { room: @stubs.channelWillFailChatPost }, { text: "textMessage" }
     @stubs._sendCount.should.equal 0
     setImmediate(( =>
