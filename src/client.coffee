@@ -35,6 +35,8 @@ class SlackClient
     # NOTE: the recommended initialization options are `{ dataStore: false, useRtmConnect: true }`. However the
     # @rtm.dataStore property is publically accessible, so the recommended settings cannot be used without breaking
     # this object's API. The property is no longer used internally.
+    options.rtm = options.rtm || {}
+    options.rtm = { dataStore: false, useRtmConnect: true }  
     @rtm = new RtmClient options.token, options.rtm
     @web = new WebClient options.token, { maxRequestConcurrency: 1 }
     
@@ -88,19 +90,6 @@ class SlackClient
   ###
   onEvent: (callback) ->
     @eventHandler = callback if @eventHandler != callback
-
-  ###*
-  # DEPRECATED Attach event handlers to the RTM stream
-  # @public
-  # @deprecated This method is being removed without a replacement in the next major version.
-  ###
-  on: (type, callback) ->
-    @robot.logger.warning "SlackClient#on() is a deprecated method and will be removed in the next major version " +
-      "of hubot-slack. It is recommended not to use event handlers on the Slack clients directly. Please file an " +
-      "issue for any specific event type you need.\n" +
-      "Issue tracker: <https://github.com/slackapi/hubot-slack/issues>\n" +
-      "Event type: #{type}\n"
-    @rtm.on(type, callback)
 
   ###*
   # Disconnect from the Slack RTM API

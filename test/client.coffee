@@ -165,21 +165,10 @@ describe 'onEvent()', ->
     ), 0);
 
 
-describe 'on() - DEPRECATED', ->
-  it 'Should register events on the RTM stream', ->
-    event = undefined
-    @client.on 'some_event', (e) -> event = e
-    @client.rtm.emit('some_event', {})
-    event.should.be.ok
-
 describe 'disconnect()', ->
   it 'Should disconnect RTM', ->
     @client.disconnect()
     @stubs._connected.should.be.false
-  it 'should remove all RTM listeners - LEGACY', ->
-    @client.on 'some_event', _.noop
-    @client.disconnect()
-    @client.rtm.listeners('some_event', true).should.not.be.ok
 
 describe 'setTopic()', ->
 
