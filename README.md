@@ -1,4 +1,9 @@
-# hubot-slack
+# hubot-slack-websockets
+
+The aim of this project is to make Hubot talk with web sockets. At Wehkamp we use Hubot a lot for our small chat bots. As the RTM gets deprecated, we're trying to make a connector that works with web sockets.
+
+
+
 
 This is a [Hubot](http://hubot.github.com/) adapter to use with [Slack](https://slack.com).
 

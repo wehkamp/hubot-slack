@@ -2,6 +2,7 @@ _                      = require "lodash"
 Promise                = require "bluebird"
 {RtmClient, WebClient} = require "@slack/client"
 SlackFormatter         = require "./formatter"
+{App}                  = require '@slack/bolt'
 
 class SlackClient
   ###*
@@ -36,8 +37,18 @@ class SlackClient
     # @rtm.dataStore property is publically accessible, so the recommended settings cannot be used without breaking
     # this object's API. The property is no longer used internally.
     options.rtm = options.rtm || {}
-    options.rtm = { dataStore: false, useRtmConnect: true }  
+    options.rtm = { dataStore: false, useRtmConnect: true }
+
     @rtm = new RtmClient options.token, options.rtm
+
+    if options.app and options.app.token
+      @app = new App({
+        token: options.app.token
+        appToken: options.app.appToken
+        socketMode: true,
+      })
+
+
     @web = new WebClient options.token, { maxRequestConcurrency: 1 }
     
     @apiPageSize = 100

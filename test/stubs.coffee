@@ -274,7 +274,7 @@ beforeEach ->
 
   @slacktextmessage_invalid_conversation = new SlackTextMessage @stubs.self, undefined, undefined, {text: undefined}, 'C888', undefined, @slackbot.client
 
-  @client = new SlackClient {token: 'xoxb-faketoken'}, @stubs.robot
+  @client = new SlackClient {token: 'xoxb-faketoken', app: { token: 'xoxb-faketoken' }}, @stubs.robot
   _.merge @client.rtm, @stubs.rtm
   _.merge @client.web.chat, @stubs.chatMock
   _.merge @client.web.conversations, @stubs.conversationsMock

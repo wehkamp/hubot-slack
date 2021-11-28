@@ -287,7 +287,10 @@ describe 'Users data', ->
     should.equal user.email_address, @stubs.user.profile.email
     should.equal user.slack.misc, @stubs.user.misc
 
-    client = new SlackClient {token: 'xoxb-faketoken'}, @stubs.robot
+    client = new SlackClient {
+      token: 'xoxb-faketoken'
+      app: { token: 'xoxb-faketoken'}  
+    }, @stubs.robot
 
     user_change_event =
       type: 'user_change'
